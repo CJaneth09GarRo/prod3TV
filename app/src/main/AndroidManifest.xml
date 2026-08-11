@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ================================ -->
+    <!-- CARACTERÍSTICAS DE ANDROID TV    -->
+    <!-- ================================ -->
+
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.television"
+        android:required="true" />
+
+
+    <!-- ================================ -->
+    <!-- APLICACIÓN                       -->
+    <!-- ================================ -->
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:icon="@drawable/ic_pizza"
+        android:banner="@drawable/ic_pizza"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyTVCJanGR">
+
+
+        <!-- ============================ -->
+        <!-- ACTIVIDAD PRINCIPAL          -->
+        <!-- ============================ -->
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="landscape"
+            android:exported="true">
+
+            <intent-filter>
+
+                <action
+                    android:name="android.intent.action.MAIN" />
+
+                <category
+                    android:name="android.intent.category.LEANBACK_LAUNCHER" />
+
+            </intent-filter>
+
+        </activity>
+
+
+        <!-- ============================ -->
+        <!-- PROTECTOR DE PANTALLA        -->
+        <!-- ============================ -->
+
+        <activity
+            android:name=".ScreensaverActivity"
+            android:screenOrientation="landscape"
+            android:exported="false"
+            android:theme="@style/Theme.Leanback" />
+
+
+        <!-- ============================ -->
+        <!-- REPRODUCTOR DE VIDEO         -->
+        <!-- ============================ -->
+
+        <activity
+            android:name=".VideoActivity"
+            android:screenOrientation="landscape"
+            android:exported="false"
+            android:theme="@style/Theme.Leanback" />
+
+
+        <!-- ============================ -->
+        <!-- JUEGO PIZZERÍA               -->
+        <!-- ============================ -->
+
+        <activity
+            android:name=".JuegoPizzeriaActivity"
+            android:screenOrientation="landscape"
+            android:exported="false" />
+
+
+    </application>
+
+</manifest>
