@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,6 +11,7 @@
     <!-- ================= HEADER ================= -->
 
     <LinearLayout
+        android:id="@+id/mainHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -110,28 +112,28 @@
             <Button
                 android:id="@+id/btnJuego"
                 android:layout_width="310dp"
-                android:layout_height="150dp"
-                android:layout_margin="12dp"
+                android:layout_height="140dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/bg_menu_button"
                 android:focusable="true"
                 android:clickable="true"
                 android:text="🍕\nJuego Pizzería"
                 android:textAllCaps="false"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="#5D4037" />
 
             <Button
                 android:id="@+id/btnMusica"
                 android:layout_width="310dp"
-                android:layout_height="150dp"
-                android:layout_margin="12dp"
+                android:layout_height="140dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/bg_menu_button"
                 android:focusable="true"
                 android:clickable="true"
                 android:text="🎵\nMúsica"
                 android:textAllCaps="false"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="#5D4037" />
 
@@ -146,28 +148,64 @@
             <Button
                 android:id="@+id/btnVideo"
                 android:layout_width="310dp"
-                android:layout_height="150dp"
-                android:layout_margin="12dp"
+                android:layout_height="140dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/bg_menu_button"
                 android:focusable="true"
                 android:clickable="true"
                 android:text="▶️\nVideo"
                 android:textAllCaps="false"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="#5D4037" />
 
             <Button
                 android:id="@+id/btnProtector"
                 android:layout_width="310dp"
-                android:layout_height="150dp"
-                android:layout_margin="12dp"
+                android:layout_height="140dp"
+                android:layout_margin="10dp"
                 android:background="@drawable/bg_menu_button"
                 android:focusable="true"
                 android:clickable="true"
                 android:text="🌙\nProtector"
                 android:textAllCaps="false"
-                android:textSize="24sp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#5D4037" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnStreaming"
+                android:layout_width="310dp"
+                android:layout_height="140dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/bg_menu_button"
+                android:focusable="true"
+                android:clickable="true"
+                android:text="🎬\nStreaming"
+                android:textAllCaps="false"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#5D4037" />
+
+            <Button
+                android:id="@+id/btnClima"
+                android:layout_width="310dp"
+                android:layout_height="140dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/bg_menu_button"
+                android:focusable="true"
+                android:clickable="true"
+                android:text="☁️\nClima"
+                android:textAllCaps="false"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="#5D4037" />
 

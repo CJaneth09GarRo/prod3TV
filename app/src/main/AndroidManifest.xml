@@ -19,7 +19,7 @@
         android:required="true" />
 
 
-    <!-- ================================ -->
+      <!-- ================================ -->
     <!-- APLICACIÓN                       -->
     <!-- ================================ -->
 
@@ -82,6 +82,33 @@
 
         <activity
             android:name=".JuegoPizzeriaActivity"
+            android:screenOrientation="landscape"
+            android:exported="false" />
+
+        <!-- ============================ -->
+        <!-- MÚSICA                       -->
+        <!-- ============================ -->
+
+        <activity
+            android:name=".MusicaActivity"
+            android:screenOrientation="landscape"
+            android:exported="false" />
+
+        <!-- ============================ -->
+        <!-- STREAMING                    -->
+        <!-- ============================ -->
+
+        <activity
+            android:name=".StreamingActivity"
+            android:screenOrientation="landscape"
+            android:exported="false" />
+
+        <!-- ============================ -->
+        <!-- CLIMA                        -->
+        <!-- ============================ -->
+
+        <activity
+            android:name=".ClimaActivity"
             android:screenOrientation="landscape"
             android:exported="false" />
 

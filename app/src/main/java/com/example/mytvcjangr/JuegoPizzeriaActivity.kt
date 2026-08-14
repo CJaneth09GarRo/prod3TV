@@ -185,7 +185,7 @@ class JuegoPizzeriaActivity : AppCompatActivity() {
         recetaActual =
             ingredientes
                 .shuffled(Random)
-                .take(3)
+                .take(2)
                 .toMutableList()
 
         posicionActual = 0
@@ -195,7 +195,7 @@ class JuegoPizzeriaActivity : AppCompatActivity() {
         mostrarReceta()
 
         tvFeedback.text =
-            "¡Prepara la pizza!"
+            "¡Usa las flechas y ENTER!"
 
         tvFeedback.setTextColor(
             Color.parseColor("#5D4037")
@@ -218,7 +218,7 @@ class JuegoPizzeriaActivity : AppCompatActivity() {
         tvRecipe.text = texto
 
         tvProgress.text =
-            "Ingrediente ${posicionActual + 1} de 3"
+            "Ingrediente ${posicionActual + 1} de 2"
     }
 
     private fun comprobarIngrediente(
@@ -267,28 +267,28 @@ class JuegoPizzeriaActivity : AppCompatActivity() {
 
         posicionActual++
 
-        if (posicionActual >= 3) {
+        if (posicionActual >= 2) {
 
             hornearPizza()
 
         } else {
 
             tvProgress.text =
-                "Ingrediente ${posicionActual + 1} de 3"
+                "Ingrediente ${posicionActual + 1} de 2"
         }
     }
 
     private fun ingredienteIncorrecto() {
 
         tvFeedback.text =
-            "✗ ¡Ese no es! Inténtalo de nuevo"
+            "✗ ¡Casi! Intenta de nuevo"
 
         tvFeedback.setTextColor(
             Color.parseColor("#C62828")
         )
 
         tvPizza.text =
-            "🍕\n¡ERROR!"
+            "🍕\n¡Opps!"
 
         handler.postDelayed({
 
@@ -297,10 +297,10 @@ class JuegoPizzeriaActivity : AppCompatActivity() {
                 posicionActual = 0
 
                 tvProgress.text =
-                    "Ingrediente 1 de 3"
+                    "Ingrediente 1 de 2"
 
                 tvFeedback.text =
-                    "La pizza se reinició"
+                    "¡Vamos de nuevo!"
 
                 tvFeedback.setTextColor(
                     Color.parseColor("#5D4037")
@@ -310,7 +310,7 @@ class JuegoPizzeriaActivity : AppCompatActivity() {
                     "🍕\nMASA"
             }
 
-        }, 1200)
+        }, 800)
     }
 
     private fun hornearPizza() {
@@ -328,17 +328,17 @@ class JuegoPizzeriaActivity : AppCompatActivity() {
             "Pizzas: $pizzasHorneadas"
 
         tvProgress.text =
-            "¡Pizza completada!"
+            "¡Excelente!"
 
         tvFeedback.text =
-            "🎉 ¡PIZZA HORNEADA! +100 puntos"
+            "🎉 ¡PIZZA LISTA! +100"
 
         tvFeedback.setTextColor(
             Color.parseColor("#2E7D32")
         )
 
         tvPizza.text =
-            "🍕🔥\n¡LISTA!"
+            "🍕🔥\n¡YUMMY!"
 
         handler.postDelayed({
 
@@ -347,57 +347,14 @@ class JuegoPizzeriaActivity : AppCompatActivity() {
                 nuevaReceta()
             }
 
-        }, 1800)
+        }, 1200)
     }
 
     override fun dispatchKeyEvent(
         event: KeyEvent
     ): Boolean {
-
-        if (event.action ==
-            KeyEvent.ACTION_DOWN
-        ) {
-
-            when (event.keyCode) {
-
-                KeyEvent.KEYCODE_DPAD_UP -> {
-
-                    comprobarIngrediente(
-                        KeyEvent.KEYCODE_DPAD_UP
-                    )
-
-                    return true
-                }
-
-                KeyEvent.KEYCODE_DPAD_DOWN -> {
-
-                    comprobarIngrediente(
-                        KeyEvent.KEYCODE_DPAD_DOWN
-                    )
-
-                    return true
-                }
-
-                KeyEvent.KEYCODE_DPAD_LEFT -> {
-
-                    comprobarIngrediente(
-                        KeyEvent.KEYCODE_DPAD_LEFT
-                    )
-
-                    return true
-                }
-
-                KeyEvent.KEYCODE_DPAD_RIGHT -> {
-
-                    comprobarIngrediente(
-                        KeyEvent.KEYCODE_DPAD_RIGHT
-                    )
-
-                    return true
-                }
-            }
-        }
-
+        // Dejamos que el sistema maneje la navegación por defecto (flechas -> foco)
+        // Y el click (Enter -> onClickListener)
         return super.dispatchKeyEvent(event)
     }
 

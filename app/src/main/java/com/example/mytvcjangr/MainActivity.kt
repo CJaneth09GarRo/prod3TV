@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnMusica: Button
     private lateinit var btnVideo: Button
     private lateinit var btnProtector: Button
+    private lateinit var btnStreaming: Button
+    private lateinit var btnClima: Button
 
     private val handler = Handler(Looper.getMainLooper())
 
@@ -38,6 +40,14 @@ class MainActivity : AppCompatActivity() {
         abrirScreensaver()
     }
 
+    private lateinit var tvFooter: TextView
+    private lateinit var mainRoot: View
+    private lateinit var mainHeader: View
+    private lateinit var tvTitulo: TextView
+    private lateinit var tvSubtitulo: TextView
+
+    private var themeIndex = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,17 +62,56 @@ class MainActivity : AppCompatActivity() {
         handler.post(relojRunnable)
 
         reiniciarTemporizador()
+        
+        tvFooter.setOnClickListener {
+            cambiarTema()
+        }
+        tvFooter.isFocusable = true
     }
 
     private fun inicializarVistas() {
-
+        mainRoot = findViewById(R.id.mainRoot)
+        mainHeader = findViewById(R.id.mainHeader)
+        tvTitulo = findViewById(R.id.tvTitulo)
+        tvSubtitulo = findViewById(R.id.tvSubtitulo)
         tvHora = findViewById(R.id.tvHora)
         tvFecha = findViewById(R.id.tvFecha)
+        tvFooter = findViewById(R.id.tvFooter)
 
         btnJuego = findViewById(R.id.btnJuego)
         btnMusica = findViewById(R.id.btnMusica)
         btnVideo = findViewById(R.id.btnVideo)
         btnProtector = findViewById(R.id.btnProtector)
+        btnStreaming = findViewById(R.id.btnStreaming)
+        btnClima = findViewById(R.id.btnClima)
+    }
+
+    private fun cambiarTema() {
+        themeIndex = (themeIndex + 1) % 3
+        when (themeIndex) {
+            0 -> { // Classic Light
+                mainRoot.setBackgroundColor(android.graphics.Color.parseColor("#FFF8F0"))
+                mainHeader.setBackgroundColor(android.graphics.Color.parseColor("#FFE4D1"))
+                tvTitulo.setTextColor(android.graphics.Color.parseColor("#5D4037"))
+                tvFooter.text = "Tema: Clásico (Presiona para cambiar)"
+            }
+            1 -> { // Dark Mode
+                mainRoot.setBackgroundColor(android.graphics.Color.parseColor("#121212"))
+                mainHeader.setBackgroundColor(android.graphics.Color.parseColor("#1F1F1F"))
+                tvTitulo.setTextColor(android.graphics.Color.WHITE)
+                tvSubtitulo.setTextColor(android.graphics.Color.LTGRAY)
+                tvFooter.text = "Tema: Oscuro Elegante"
+                tvFooter.setTextColor(android.graphics.Color.WHITE)
+            }
+            2 -> { // Cyberpunk/Gamer
+                mainRoot.setBackgroundColor(android.graphics.Color.parseColor("#0D0221"))
+                mainHeader.setBackgroundColor(android.graphics.Color.parseColor("#261447"))
+                tvTitulo.setTextColor(android.graphics.Color.parseColor("#FF0054"))
+                tvSubtitulo.setTextColor(android.graphics.Color.parseColor("#39FF14"))
+                tvFooter.text = "Tema: Cyber Gamer"
+                tvFooter.setTextColor(android.graphics.Color.parseColor("#39FF14"))
+            }
+        }
     }
 
     private fun configurarBotones() {
@@ -79,22 +128,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        /*
-         * Actualmente el proyecto solamente tiene las Activities
-         * solicitadas para Juego, Video y Protector.
-         *
-         * El botón Música queda preparado para que posteriormente
-         * puedas agregar MusicActivity.
-         */
         btnMusica.setOnClickListener {
 
             reiniciarTemporizador()
 
-            android.widget.Toast.makeText(
+            val intent = Intent(
                 this,
-                "Módulo de Música próximamente",
-                android.widget.Toast.LENGTH_SHORT
-            ).show()
+                MusicaActivity::class.java
+            )
+
+            startActivity(intent)
         }
 
         btnVideo.setOnClickListener {
@@ -115,6 +158,30 @@ class MainActivity : AppCompatActivity() {
 
             abrirScreensaver()
         }
+
+        btnStreaming.setOnClickListener {
+
+            reiniciarTemporizador()
+
+            val intent = Intent(
+                this,
+                StreamingActivity::class.java
+            )
+
+            startActivity(intent)
+        }
+
+        btnClima.setOnClickListener {
+
+            reiniciarTemporizador()
+
+            val intent = Intent(
+                this,
+                ClimaActivity::class.java
+            )
+
+            startActivity(intent)
+        }
     }
 
     private fun configurarAnimacionFoco() {
@@ -123,7 +190,9 @@ class MainActivity : AppCompatActivity() {
             btnJuego,
             btnMusica,
             btnVideo,
-            btnProtector
+            btnProtector,
+            btnStreaming,
+            btnClima
         )
 
         botones.forEach { boton ->
