@@ -1,35 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <!-- Estado enfocado: Brillo intenso y borde definido -->
     <item android:state_focused="true">
         <shape android:shape="rectangle">
-            <solid android:color="#FFD1DC" />
-            <corners android:radius="25dp" />
+            <gradient
+                android:startColor="#FFFFFF"
+                android:endColor="#FFD1DC"
+                android:angle="270" />
+            <corners android:radius="16dp" />
             <stroke
                 android:width="4dp"
-                android:color="#FF8FA3" />
-            <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp" />
+                android:color="#FFFFFF" />
         </shape>
     </item>
-
+    <!-- Estado normal: Semi-transparente para ver el fondo satinado -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#FFE8D6" />
-            <corners android:radius="25dp" />
+            <solid android:color="#CCFFE8D6" />
+            <corners android:radius="16dp" />
             <stroke
-                android:width="2dp"
-                android:color="#E8B4A0" />
-            <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp" />
+                android:width="1dp"
+                android:color="#80E8B4A0" />
         </shape>
     </item>
-
 </selector>

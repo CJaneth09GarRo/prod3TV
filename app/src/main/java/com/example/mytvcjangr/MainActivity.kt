@@ -81,34 +81,26 @@ class MainActivity : AppCompatActivity() {
         btnJuego = findViewById(R.id.btnJuego)
         btnMusica = findViewById(R.id.btnMusica)
         btnVideo = findViewById(R.id.btnVideo)
+        btnClima = findViewById(R.id.btnClima)
+        
+        // Mantener referencias para evitar crash, aunque estén ocultos
         btnProtector = findViewById(R.id.btnProtector)
         btnStreaming = findViewById(R.id.btnStreaming)
-        btnClima = findViewById(R.id.btnClima)
     }
 
     private fun cambiarTema() {
         themeIndex = (themeIndex + 1) % 3
         when (themeIndex) {
-            0 -> { // Classic Light
-                mainRoot.setBackgroundColor(android.graphics.Color.parseColor("#FFF8F0"))
-                mainHeader.setBackgroundColor(android.graphics.Color.parseColor("#FFE4D1"))
-                tvTitulo.setTextColor(android.graphics.Color.parseColor("#5D4037"))
-                tvFooter.text = "Tema: Clásico (Presiona para cambiar)"
+            0 -> { // Classic
+                tvFooter.text = "© 2026 - Desarrollado por GARCIA RODRIGUEZ CLAUDIA JANETH 9B | Smart TV OS Project"
+                tvFooter.setTextColor(android.graphics.Color.parseColor("#BDBDBD"))
             }
-            1 -> { // Dark Mode
-                mainRoot.setBackgroundColor(android.graphics.Color.parseColor("#121212"))
-                mainHeader.setBackgroundColor(android.graphics.Color.parseColor("#1F1F1F"))
-                tvTitulo.setTextColor(android.graphics.Color.WHITE)
-                tvSubtitulo.setTextColor(android.graphics.Color.LTGRAY)
-                tvFooter.text = "Tema: Oscuro Elegante"
+            1 -> { // Dark
+                tvFooter.text = "GARCIA RODRIGUEZ C.J. - Mode: Dark"
                 tvFooter.setTextColor(android.graphics.Color.WHITE)
             }
-            2 -> { // Cyberpunk/Gamer
-                mainRoot.setBackgroundColor(android.graphics.Color.parseColor("#0D0221"))
-                mainHeader.setBackgroundColor(android.graphics.Color.parseColor("#261447"))
-                tvTitulo.setTextColor(android.graphics.Color.parseColor("#FF0054"))
-                tvSubtitulo.setTextColor(android.graphics.Color.parseColor("#39FF14"))
-                tvFooter.text = "Tema: Cyber Gamer"
+            2 -> { // Cyber
+                tvFooter.text = "CJGR 9B - SYSTEM ONLINE"
                 tvFooter.setTextColor(android.graphics.Color.parseColor("#39FF14"))
             }
         }
@@ -190,30 +182,39 @@ class MainActivity : AppCompatActivity() {
             btnJuego,
             btnMusica,
             btnVideo,
-            btnProtector,
-            btnStreaming,
             btnClima
         )
 
         botones.forEach { boton ->
 
             boton.setOnFocusChangeListener { vista, tieneFoco ->
+                
+                // Intentamos obtener el CardView padre para escalar todo el conjunto
+                val parentCard = vista.parent as? androidx.cardview.widget.CardView
 
                 if (tieneFoco) {
-
-                    vista.animate()
-                        .scaleX(1.08f)
-                        .scaleY(1.08f)
-                        .setDuration(150)
+                    val target = parentCard ?: vista
+                    target.animate()
+                        .scaleX(1.12f)
+                        .scaleY(1.12f)
+                        .setDuration(200)
                         .start()
+                    
+                    if (parentCard != null) {
+                        parentCard.cardElevation = 25f
+                    }
 
                 } else {
-
-                    vista.animate()
+                    val target = parentCard ?: vista
+                    target.animate()
                         .scaleX(1.0f)
                         .scaleY(1.0f)
-                        .setDuration(150)
+                        .setDuration(200)
                         .start()
+                    
+                    if (parentCard != null) {
+                        parentCard.cardElevation = 8f
+                    }
                 }
             }
         }
