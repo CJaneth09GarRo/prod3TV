@@ -182,7 +182,9 @@ class MainActivity : AppCompatActivity() {
             btnJuego,
             btnMusica,
             btnVideo,
-            btnClima
+            btnClima,
+            btnProtector,
+            btnStreaming
         )
 
         botones.forEach { boton ->
@@ -239,9 +241,10 @@ class MainActivity : AppCompatActivity() {
 
         handler.removeCallbacks(screensaverRunnable)
 
+        // Aumentado a 60 segundos para permitir navegación fluida
         handler.postDelayed(
             screensaverRunnable,
-            10_000
+            60_000
         )
     }
 
