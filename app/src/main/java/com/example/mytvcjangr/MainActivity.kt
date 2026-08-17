@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnMusica: Button
     private lateinit var btnVideo: Button
     private lateinit var btnProtector: Button
+    private lateinit var btnStreaming: Button
+    private lateinit var btnClima: Button
 
     private val handler = Handler(Looper.getMainLooper())
 
@@ -38,6 +40,14 @@ class MainActivity : AppCompatActivity() {
         abrirScreensaver()
     }
 
+    private lateinit var tvFooter: TextView
+    private lateinit var mainRoot: View
+    private lateinit var mainHeader: View
+    private lateinit var tvTitulo: TextView
+    private lateinit var tvSubtitulo: TextView
+
+    private var themeIndex = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,17 +62,48 @@ class MainActivity : AppCompatActivity() {
         handler.post(relojRunnable)
 
         reiniciarTemporizador()
+        
+        tvFooter.setOnClickListener {
+            cambiarTema()
+        }
+        tvFooter.isFocusable = true
     }
 
     private fun inicializarVistas() {
-
+        mainRoot = findViewById(R.id.mainRoot)
+        mainHeader = findViewById(R.id.mainHeader)
+        tvTitulo = findViewById(R.id.tvTitulo)
+        tvSubtitulo = findViewById(R.id.tvSubtitulo)
         tvHora = findViewById(R.id.tvHora)
         tvFecha = findViewById(R.id.tvFecha)
+        tvFooter = findViewById(R.id.tvFooter)
 
         btnJuego = findViewById(R.id.btnJuego)
         btnMusica = findViewById(R.id.btnMusica)
         btnVideo = findViewById(R.id.btnVideo)
+        btnClima = findViewById(R.id.btnClima)
+        
+        // Mantener referencias para evitar crash, aunque estén ocultos
         btnProtector = findViewById(R.id.btnProtector)
+        btnStreaming = findViewById(R.id.btnStreaming)
+    }
+
+    private fun cambiarTema() {
+        themeIndex = (themeIndex + 1) % 3
+        when (themeIndex) {
+            0 -> { // Classic
+                tvFooter.text = "© 2026 - Desarrollado por GARCIA RODRIGUEZ CLAUDIA JANETH 9B | Smart TV OS Project"
+                tvFooter.setTextColor(android.graphics.Color.parseColor("#BDBDBD"))
+            }
+            1 -> { // Dark
+                tvFooter.text = "GARCIA RODRIGUEZ C.J. - Mode: Dark"
+                tvFooter.setTextColor(android.graphics.Color.WHITE)
+            }
+            2 -> { // Cyber
+                tvFooter.text = "CJGR 9B - SYSTEM ONLINE"
+                tvFooter.setTextColor(android.graphics.Color.parseColor("#39FF14"))
+            }
+        }
     }
 
     private fun configurarBotones() {
@@ -79,22 +120,16 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        /*
-         * Actualmente el proyecto solamente tiene las Activities
-         * solicitadas para Juego, Video y Protector.
-         *
-         * El botón Música queda preparado para que posteriormente
-         * puedas agregar MusicActivity.
-         */
         btnMusica.setOnClickListener {
 
             reiniciarTemporizador()
 
-            android.widget.Toast.makeText(
+            val intent = Intent(
                 this,
-                "Módulo de Música próximamente",
-                android.widget.Toast.LENGTH_SHORT
-            ).show()
+                MusicaActivity::class.java
+            )
+
+            startActivity(intent)
         }
 
         btnVideo.setOnClickListener {
@@ -115,6 +150,30 @@ class MainActivity : AppCompatActivity() {
 
             abrirScreensaver()
         }
+
+        btnStreaming.setOnClickListener {
+
+            reiniciarTemporizador()
+
+            val intent = Intent(
+                this,
+                StreamingActivity::class.java
+            )
+
+            startActivity(intent)
+        }
+
+        btnClima.setOnClickListener {
+
+            reiniciarTemporizador()
+
+            val intent = Intent(
+                this,
+                ClimaActivity::class.java
+            )
+
+            startActivity(intent)
+        }
     }
 
     private fun configurarAnimacionFoco() {
@@ -123,28 +182,41 @@ class MainActivity : AppCompatActivity() {
             btnJuego,
             btnMusica,
             btnVideo,
-            btnProtector
+            btnClima,
+            btnProtector,
+            btnStreaming
         )
 
         botones.forEach { boton ->
 
             boton.setOnFocusChangeListener { vista, tieneFoco ->
+                
+                // Intentamos obtener el CardView padre para escalar todo el conjunto
+                val parentCard = vista.parent as? androidx.cardview.widget.CardView
 
                 if (tieneFoco) {
-
-                    vista.animate()
-                        .scaleX(1.08f)
-                        .scaleY(1.08f)
-                        .setDuration(150)
+                    val target = parentCard ?: vista
+                    target.animate()
+                        .scaleX(1.12f)
+                        .scaleY(1.12f)
+                        .setDuration(200)
                         .start()
+                    
+                    if (parentCard != null) {
+                        parentCard.cardElevation = 25f
+                    }
 
                 } else {
-
-                    vista.animate()
+                    val target = parentCard ?: vista
+                    target.animate()
                         .scaleX(1.0f)
                         .scaleY(1.0f)
-                        .setDuration(150)
+                        .setDuration(200)
                         .start()
+                    
+                    if (parentCard != null) {
+                        parentCard.cardElevation = 8f
+                    }
                 }
             }
         }
@@ -169,9 +241,10 @@ class MainActivity : AppCompatActivity() {
 
         handler.removeCallbacks(screensaverRunnable)
 
+        // Aumentado a 60 segundos para permitir navegación fluida
         handler.postDelayed(
             screensaverRunnable,
-            10_000
+            60_000
         )
     }
 

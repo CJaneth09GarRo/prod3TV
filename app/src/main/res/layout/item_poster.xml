@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="170dp"
+    android:layout_margin="8dp"
+    android:focusable="true"
+    android:clickable="true"
+    android:background="@drawable/bg_menu_button">
+
+    <ImageView
+        android:id="@+id/ivPoster"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_pizza" />
+
+    <TextView
+        android:id="@+id/tvPosterTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#80000000"
+        android:padding="4dp"
+        android:text="Pelicula"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:gravity="center" />
+
+</FrameLayout>

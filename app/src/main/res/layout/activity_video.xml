@@ -1,99 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/videoRoot"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:background="#000000">
 
     <VideoView
         android:id="@+id/videoView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center" />
+        android:layout_centerInParent="true" />
 
-    <!-- CONTROLES -->
-
+    <!-- Overlay de controles -->
     <LinearLayout
         android:id="@+id/videoControls"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="#99000000"
         android:padding="20dp"
-        android:background="#CC000000">
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvVideoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Video Title"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_marginBottom="10dp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnRewind"
-                android:layout_width="150dp"
-                android:layout_height="65dp"
-                android:layout_margin="6dp"
-                android:text="↶ -10s"
-                android:textSize="18sp"
-                android:textAllCaps="false"
-                android:focusable="true" />
+                android:id="@+id/btnPrevVideo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:text="⏮"
+                android:focusable="true"
+                android:background="@drawable/bg_round_button" />
 
             <Button
-                android:id="@+id/btnPlayPause"
-                android:layout_width="180dp"
-                android:layout_height="65dp"
-                android:layout_margin="6dp"
-                android:text="▶ Play"
-                android:textSize="18sp"
-                android:textAllCaps="false"
-                android:focusable="true" />
+                android:id="@+id/btnPlayPauseVideo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginHorizontal="20dp"
+                android:text="⏸"
+                android:focusable="true"
+                android:background="@drawable/bg_round_button_large" />
 
             <Button
-                android:id="@+id/btnForward"
-                android:layout_width="150dp"
-                android:layout_height="65dp"
-                android:layout_margin="6dp"
-                android:text="+10s ↷"
-                android:textSize="18sp"
-                android:textAllCaps="false"
-                android:focusable="true" />
-
+                android:id="@+id/btnNextVideo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:text="⏭"
+                android:focusable="true"
+                android:background="@drawable/bg_round_button" />
         </LinearLayout>
-
-        <SeekBar
-            android:id="@+id/videoSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:focusable="false" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvCurrentTime"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="00:00"
-                android:textSize="16sp"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:id="@+id/tvTotalTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00:00"
-                android:textSize="16sp"
-                android:textColor="#FFFFFF" />
-
-        </LinearLayout>
-
     </LinearLayout>
 
-</FrameLayout>
+</RelativeLayout>
